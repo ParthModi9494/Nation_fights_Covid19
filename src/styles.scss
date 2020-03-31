@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bulma/css/bulma.min.css";
+// @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Raleway&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+
+body {
+  font-family: 'Lora', serif;
+  // font-family: 'Raleway', sans-serif;
+  // font-family: "Raleway", sans-serif;
+  // font-family: "Montserrat", sans-serif;
+}
