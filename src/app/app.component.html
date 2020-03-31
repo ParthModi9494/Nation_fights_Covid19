@@ -2,11 +2,9 @@
   <div class="notification">
     <h2 class="title is-3">Covid-19 India Tracker</h2>
   </div>
-
-
   <table class="table">
-    <thead>
-      <tr>
+    <thead class="has-text-info">
+      <tr class="has-background-info">
         <th>
           State / UT
         </th>
@@ -25,21 +23,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let state of statewiseArr" >
-        <td><b>{{ state.state }}</b></td>
-        <td>{{ state.confirmed }}</td>
-        <td>{{ state.active }}</td>
-        <td>{{ state.recovered }}</td>
-        <td>{{ state.deaths }}</td>
+      <tr *ngFor="let state of statewiseArr">
+        <td align="left"><b>{{ state.state }}</b></td>
+        <td align="right"><span *ngIf="state.delta.confirmed"
+            class="has-text-danger is-size-7">+{{ state?.delta?.confirmed }}</span>
+          {{ state.confirmed }}</td>
+        <td align="right">{{ state.active }}</td>
+        <td align="right">{{ state.recovered }}</td>
+        <td align="right">{{ state.deaths }}</td>
       </tr>
     </tbody>
 
 
   </table>
 </div>
-
-
-<!-- <div *ngFor="let state of countryData">
-  <p>{{ state.state }}</p>
-  <p *ngFor="let district of state.districts"> ----- {{ district.district }}</p>
-</div> -->
