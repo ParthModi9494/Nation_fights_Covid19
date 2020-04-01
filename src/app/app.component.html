@@ -1,39 +1,109 @@
-<div class="container has-text-centered">
-  <div class="notification">
-    <h2 class="title is-3">Covid-19 India Tracker</h2>
+<div class="has-text-centered">
+  <div class="columns notification has-background-warning">
+    <span class="column">
+      <h2 class="title is-3">Covid-19 India Tracker</h2>
+      <span>
+        <p>Data Credits : https://www.covid19india.org</p>
+        <p>Last Updated {{ getUpdatedTime(generalStats?.lastupdatedtime)}}</p>
+      </span>
+    </span>
+
   </div>
-  <table class="table">
-    <thead class="has-text-info">
-      <tr class="has-background-info">
-        <th>
-          State / UT
-        </th>
-        <th>
-          Confirmed
-        </th>
-        <th>
-          Active
-        </th>
-        <th>
-          Recovered
-        </th>
-        <th>
-          Deaths
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let state of statewiseArr">
-        <td align="left"><b>{{ state.state }}</b></td>
-        <td align="right"><span *ngIf="state.delta.confirmed"
-            class="has-text-danger is-size-7">+{{ state?.delta?.confirmed }}</span>
-          {{ state.confirmed }}</td>
-        <td align="right">{{ state.active }}</td>
-        <td align="right">{{ state.recovered }}</td>
-        <td align="right">{{ state.deaths }}</td>
-      </tr>
-    </tbody>
+  <div class="columns">
+    <div class="column">
+      <div class="card" style="background-color: hsla(348, 100%, 61%,0.2);">
+        <div class="card-content">
+          <p class="title has-text-danger">
+            Confirmed
+          </p>
+          <h4 class="is-6 has-text-danger"></h4>
+          <h1 class="title is-3 has-text-danger">{{ generalStats?.confirmed }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card" style="background-color: hsla(204, 86%, 53%,0.2);">
+        <div class="card-content">
+          <p class="title has-text-info">
+            Active
+          </p>
+          <h4 class="is-6 has-text-info"></h4>
+          <h1 class="title is-3 has-text-info">{{ generalStats?.active }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card" style="background-color: hsla(171, 100%, 41%,0.2);">
+        <div class="card-content">
+          <p class="title has-text-primary">
+            Recovered
+          </p>
+          <h4 class="is-6 has-text-primary"></h4>
+          <h1 class="title is-3 has-text-primary">{{ generalStats?.recovered }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="card" style="background-color: hsla(0, 0%, 48%,0.2);">
+        <div class="card-content">
+          <p class="title has-text-grey">
+            Deaths
+          </p>
+          <h4 class="is-6 has-text-grey"></h4>
+          <h1 class="title is-3 has-text-grey">{{ generalStats?.deaths }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column">
+      <highcharts-chart [Highcharts]="highcharts" [options]="confirmedPatientChartOptions"
+        style="width: 100%; height: 300px; display: block;">
+      </highcharts-chart>
+      <hr>
+      <highcharts-chart [Highcharts]="highcharts" [options]="recoveredPatientsChartOptions"
+        style="width: 100%; height: 300px; display: block;">
+      </highcharts-chart>
+      <hr>
+      <highcharts-chart [Highcharts]="highcharts" [options]="deceasedPatientsChartOptions"
+        style="width: 100%; height: 300px; display: block;">
+      </highcharts-chart>
+    </div>
 
+    <div class="column">
+      <table align="center" class="table">
+        <thead class="has-text-info">
+          <tr class="has-background-info">
+            <th>
+              State / UT
+            </th>
+            <th>
+              Confirmed
+            </th>
+            <th>
+              Active
+            </th>
+            <th>
+              Recovered
+            </th>
+            <th>
+              Deaths
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let state of statewiseArr">
+            <td align="left"><b>{{ state.state }}</b></td>
+            <td align="right"><span *ngIf="state.delta.confirmed"
+                class="has-text-danger is-size-7">+{{ state?.delta?.confirmed }}</span>
+              {{ state.confirmed }}</td>
+            <td align="right">{{ state.active }}</td>
+            <td align="right">{{ state.recovered }}</td>
+            <td align="right">{{ state.deaths }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-  </table>
+  </div>
 </div>
