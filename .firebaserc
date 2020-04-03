@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "nationfightscovid19"
+  },
+  "targets": {
+    "nationfightscovid19": {
+      "hosting": {
+        "nationFightsCovid19": [
+          "nationfightscovid19"
+        ]
+      }
+    }
+  }
+}
