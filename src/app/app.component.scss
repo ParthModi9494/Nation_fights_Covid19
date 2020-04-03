@@ -1,8 +1,9 @@
+
 table {
-  border-collapse:separate;
+  border-collapse: separate;
   border-spacing: 2px;
   border-radius: 10px;
-  thead{
+  thead {
     position: sticky;
   }
   tr {
@@ -16,8 +17,4 @@ table {
     // border-radius: 5px;
     // padding: 5px;
   }
-}
-
-div.card{
-  border-radius: 10px;
 }

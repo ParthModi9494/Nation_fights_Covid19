@@ -1,0 +1,18 @@
+// background-color: #f8f9fa;
+@import "~bulma/bulma.sass";
+
+.box {
+  border-radius: 5px;
+  &.confirmed {
+    border-left: 6px solid $danger;
+  }
+  &.active {
+    border-left: 6px solid $info;
+  }
+  &.recovered {
+    border-left: 6px solid $success;
+  }
+  &.deaths {
+    border-left: 6px solid $grey;
+  }
+}
