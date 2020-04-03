@@ -1,109 +1,71 @@
-<div class="has-text-centered">
-  <div class="columns notification has-background-warning">
-    <span class="column">
-      <h2 class="title is-3">Covid-19 India Tracker</h2>
-      <span>
-        <p>Data Credits : https://www.covid19india.org</p>
-        <p>Last Updated {{ getUpdatedTime(generalStats?.lastupdatedtime)}}</p>
-      </span>
-    </span>
+<app-navbar></app-navbar>
 
-  </div>
-  <div class="columns">
-    <div class="column">
-      <div class="card" style="background-color: hsla(348, 100%, 61%,0.2);">
-        <div class="card-content">
-          <p class="title has-text-danger">
-            Confirmed
-          </p>
-          <h4 class="is-6 has-text-danger"></h4>
-          <h1 class="title is-3 has-text-danger">{{ generalStats?.confirmed }}</h1>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered is-multiline is-mobile is-vcentered has-text-centered">
+
+      <div class="column is-half-mobile has-background-danger is-size-6-mobile is-size-3-desktop">
+        <div class="card has-text-danger ">
+          <div class="card-content">
+            <div class="content">
+              <i class="fas fa-notes-medical"></i>
+              <fa-icon [icon]="faNotesMedical"></fa-icon>
+              <p>Confirmed</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="column">
-      <div class="card" style="background-color: hsla(204, 86%, 53%,0.2);">
-        <div class="card-content">
-          <p class="title has-text-info">
-            Active
-          </p>
-          <h4 class="is-6 has-text-info"></h4>
-          <h1 class="title is-3 has-text-info">{{ generalStats?.active }}</h1>
+
+
+      <div class="column is-half-mobile has-background-info is-size-6-mobile is-size-3-desktop">
+        <div class="card has-text-info">
+          <div class="card-content">
+            <div class="content has-text-info">
+              <i class="fas fa-procedures"></i>
+              <fa-icon [icon]="faProcedures"></fa-icon>
+              <p>Active</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="column">
-      <div class="card" style="background-color: hsla(171, 100%, 41%,0.2);">
-        <div class="card-content">
-          <p class="title has-text-primary">
-            Recovered
-          </p>
-          <h4 class="is-6 has-text-primary"></h4>
-          <h1 class="title is-3 has-text-primary">{{ generalStats?.recovered }}</h1>
+      <div class="column is-half-mobile has-background-success is-size-6-mobile is-size-3-desktop">
+        <div class="card has-text-success ">
+          <div class="card-content">
+            <div class="content has-text-success">
+              <fa-icon [icon]="faSmile"></fa-icon>
+              <p>Recovered</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="column">
-      <div class="card" style="background-color: hsla(0, 0%, 48%,0.2);">
-        <div class="card-content">
-          <p class="title has-text-grey">
-            Deaths
-          </p>
-          <h4 class="is-6 has-text-grey"></h4>
-          <h1 class="title is-3 has-text-grey">{{ generalStats?.deaths }}</h1>
+      <div class="column is-half-mobile has-background-grey is-size-6-mobile is-size-3-desktop">
+        <div class="card has-text-danger">
+          <div class="card-content">
+            <div class="content has-text-grey">
+              <fa-icon [icon]="faSadTear"></fa-icon>
+              <p>Deaths</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="columns">
-    <div class="column">
-      <highcharts-chart [Highcharts]="highcharts" [options]="confirmedPatientChartOptions"
-        style="width: 100%; height: 300px; display: block;">
-      </highcharts-chart>
-      <hr>
-      <highcharts-chart [Highcharts]="highcharts" [options]="recoveredPatientsChartOptions"
-        style="width: 100%; height: 300px; display: block;">
-      </highcharts-chart>
-      <hr>
-      <highcharts-chart [Highcharts]="highcharts" [options]="deceasedPatientsChartOptions"
-        style="width: 100%; height: 300px; display: block;">
-      </highcharts-chart>
-    </div>
+</section>
 
-    <div class="column">
-      <table align="center" class="table">
-        <thead class="has-text-info">
-          <tr class="has-background-info">
-            <th>
-              State / UT
-            </th>
-            <th>
-              Confirmed
-            </th>
-            <th>
-              Active
-            </th>
-            <th>
-              Recovered
-            </th>
-            <th>
-              Deaths
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let state of statewiseArr">
-            <td align="left"><b>{{ state.state }}</b></td>
-            <td align="right"><span *ngIf="state.delta.confirmed"
-                class="has-text-danger is-size-7">+{{ state?.delta?.confirmed }}</span>
-              {{ state.confirmed }}</td>
-            <td align="right">{{ state.active }}</td>
-            <td align="right">{{ state.recovered }}</td>
-            <td align="right">{{ state.deaths }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
+<div class="columns is-multiline is-mobile is-vcentered">
+  <div class="column">asd</div>
+  <div class="column">dfgdfg</div>
 </div>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      Made with Love
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum minima non laborum repudiandae cumque explicabo
+      eligendi esse natus doloremque consectetur error impedit facere aliquid distinctio aperiam, iusto voluptas facilis
+      fugit.
+      lorem
+    </p>
+  </div>
+</footer>

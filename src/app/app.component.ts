@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from './services/api.service';
 import * as Highcharts from 'highcharts';
 import * as moment from 'moment/moment.js';
+import { faSadTear, faSmile, faProcedures, faNotesMedical } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +15,10 @@ export class AppComponent implements OnInit {
   statewiseArr = [];
   highcharts = Highcharts;
   generalStats;
-
+  faSadTear = faSadTear;
+  faSmile = faSmile;
+  faProcedures = faProcedures;
+  faNotesMedical = faNotesMedical;
 
   confirmedPatientChartOptions;
   recoveredPatientsChartOptions;
@@ -142,7 +147,7 @@ export class AppComponent implements OnInit {
   }
 
   getUpdatedTime(date) {
-    if(date){
+    if (date) {
       return moment(moment(date).format("DD/MM/YYYY HH:mm:ss")).fromNow();
     } else {
       return "";
