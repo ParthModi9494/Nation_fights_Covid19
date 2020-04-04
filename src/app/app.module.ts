@@ -8,12 +8,16 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OverviewComponent } from './components/overview/overview.component';
+import { StatesTableComponent } from './components/states-table/states-table.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    OverviewComponent
+    OverviewComponent,
+    StatesTableComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

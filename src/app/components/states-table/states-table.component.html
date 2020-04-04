@@ -1,0 +1,67 @@
+<table class="table is-narrowed is-hoverable is-fullwidth is-striped animated fadeIn">
+  <thead class="has-background-info">
+    <tr class="is-size-7-mobile">
+      <th class="is-hidden-mobile has-text-white" *ngFor="let header of tableHeaders.desktop">{{ header | uppercase }}
+      </th>
+      <th class="is-hidden-desktop has-text-white" *ngFor="let header of tableHeaders.mobile">{{ header | uppercase }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let state of statesArr">
+      <tr class="has-text-centered" [ngClass]="{'is-selected': state?.isSelected}"
+        (click)="toggleState(state)">
+        <th align="left" class="is-size-7-mobile">
+          <div class="is-flex">
+            <span>
+              <fa-icon *ngIf="!state?.isSelected" class="is-size-6 is-size-7-mobile has-text-primary" [icon]="plus">
+              </fa-icon>
+              <fa-icon *ngIf="state?.isSelected" class="is-size-6 is-size-7-mobile" [icon]="minus"></fa-icon>
+            </span>
+            <span>
+              {{ state?.state }}
+            </span>
+          </div>
+        </th>
+        <td align="center" class="is-size-7-mobile">{{ state?.confirmed }}</td>
+        <td align="center" class="is-size-7-mobile">{{ state?.active}}</td>
+        <td align="center" class="is-size-7-mobile">{{ state?.recovered}}</td>
+        <td align="center" class="is-size-7-mobile">{{ state?.deaths}}</td>
+      </tr>
+      <ng-container *ngIf="state?.isSelected">
+        <tr class="is-selected">
+          <td colspan="5">
+            <table class="table is-bordered is-narrowed is-fullwidth is-striped">
+              <thead>
+                <tr class="is-size-7-mobile has-background-info">
+                  <th align="left" class="is-size-7-mobile has-text-white" colspan="3">District</th>
+                  <th align="left" class="is-size-7-mobile has-text-white" colspan="3">Confirmed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="has-text-centered" *ngFor="let districtObj of getDistricts(state?.state)">
+                  <th align="left" class="is-size-7-mobile" colspan="3">{{ districtObj?.district }}</th>
+                  <td align="left" class="is-size-7-mobile" colspan="3">{{ districtObj?.confirmed }}</td>
+                </tr>
+                <tr *ngIf="getDistricts(state?.state).length ==0" class="has-text-centered">
+                  <td colspan="5" align="center" class="is-size-7-mobile">No Data</td>
+                </tr>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </td>
+        </tr>
+        <br>
+      </ng-container>
+    </ng-container>
+  </tbody>
+  <tfoot class="has-background-danger">
+    <tr>
+      <th align="left" class="is-size-7-mobile has-text-white">{{ aggregated?.state | uppercase }}</th>
+      <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.confirmed }}</td>
+      <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.active}}</td>
+      <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.recovered}}</td>
+      <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.deaths}}</td>
+    </tr>
+  </tfoot>
+</table>

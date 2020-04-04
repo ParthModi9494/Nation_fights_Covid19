@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from './services/api.service';
 import * as Highcharts from 'highcharts';
 import * as moment from 'moment/moment.js';
-import { faSadTear, faSmile, faProcedures, faNotesMedical } from '@fortawesome/free-solid-svg-icons';
+import { StateModel } from './models/table-states.model';
+import { DataProiderService } from './services/data-proider.service';
 
 @Component({
   selector: 'app-root',
@@ -15,48 +16,28 @@ export class AppComponent implements OnInit {
   statewiseArr = [];
   highcharts = Highcharts;
   generalStats;
-  faSadTear = faSadTear;
-  faSmile = faSmile;
-  faProcedures = faProcedures;
-  faNotesMedical = faNotesMedical;
 
   confirmedPatientChartOptions;
   recoveredPatientsChartOptions;
   deceasedPatientsChartOptions;
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private dataProvider: DataProiderService
   ) { }
   ngOnInit() {
-    this.apiService.getStatWiseData().subscribe((country) => {
-      this.setStateData(country);
-    })
-
     this.apiService.getData().subscribe((data: any) => {
-      this.setTableData(data);
-      this.setChartData(data);
-    })
-  }
-
-
-
-  setStateData(country) {
-    for (const state in country) {
-      const districts = [];
-      for (const district in country[state].districtData) {
-        districts.push({ district, data: country[state].districtData[district] });
-      }
-      this.countryData.push({ state: state, districts: districts });
-    }
-  }
-
-  setTableData(data) {
-    this.statewiseArr = [...data.statewise].sort((a, b) => {
-      return b.confirmed - a.confirmed;
+      const stateArr: StateModel[] = data.statewise;
+      const sortedStatesArr = stateArr.sort((a, b) => {
+        return Number[b.confirmed] - Number[a.confirmed];
+      });
+      console.log("sortedStatesArr", sortedStatesArr);
+      const index = sortedStatesArr.findIndex((x) => {
+        return x.state === "Total";
+      });
+      this.dataProvider.statesArr.next(sortedStatesArr);
+      this.dataProvider.aggregated.next(sortedStatesArr[index]);
+      sortedStatesArr.splice(index, 1);
     });
-    console.log("states", this.statewiseArr);
-    this.generalStats = this.statewiseArr.find((x) => {
-      return x.state === "Total";
-    })
   }
 
   setChartData(data) {
