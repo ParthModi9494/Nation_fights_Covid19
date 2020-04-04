@@ -1,6 +1,5 @@
 // background-color: #f8f9fa;
-@import "~bulma/bulma.sass";
-
+@import "~bulma/sass/utilities/_all.sass";
 .box {
   border-radius: 5px;
   &.confirmed {
