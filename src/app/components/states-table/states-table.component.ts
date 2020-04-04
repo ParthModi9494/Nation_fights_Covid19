@@ -30,6 +30,10 @@ export class StatesTableComponent implements OnInit {
     this.dataProvider.statesArr.subscribe((statesArr) => {
       this.statesArr = statesArr || [];
     });
+    this.dataProvider.aggregated.subscribe((aggregated) => {
+      this.aggregated = aggregated;
+    });
+
     this.apiService.getDistrictsData().subscribe((districts: DistrictResponseModel[]) => {
       districts = districts || [];
       this.districtsArr = districts;
