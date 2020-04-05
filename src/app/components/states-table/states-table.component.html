@@ -9,8 +9,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let state of statesArr">
-      <tr class="has-text-centered" [ngClass]="{'is-selected': state?.isSelected}"
-        (click)="toggleState(state)">
+      <tr class="has-text-centered" [ngClass]="{'is-selected': state?.isSelected}" (click)="toggleState(state)">
         <th align="left" class="is-size-7-mobile">
           <div class="is-flex">
             <span>
@@ -29,6 +28,12 @@
         <td align="center" class="is-size-7-mobile">{{ state?.deaths}}</td>
       </tr>
       <ng-container *ngIf="state?.isSelected">
+        <tr>
+          <td colspan="5">
+            <span class="is-pulled-left is-size-7-mobile has-text-success">{{ getTime(state?.lastupdatedtime) }}</span>
+          </td>
+        </tr>
+
         <tr class="is-selected">
           <td colspan="5">
             <table class="table is-bordered is-narrowed is-fullwidth is-striped">

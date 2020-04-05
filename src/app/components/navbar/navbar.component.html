@@ -1,21 +1,22 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-      </a>
+      <h1 class="navbar-item is-size-3 is-size-4-mobile heading">
+        Nation Fights Corona
+      </h1>
 
-      <a role="button" class="navbar-burger burger" [ngClass]="{'is-active': isMenuOpen}" aria-label="menu" aria-expanded="false"
-        (click)="isMenuOpen = !isMenuOpen" data-target="navbarBasicExample">
+      <a role="button" class="navbar-burger burger" [ngClass]="{'is-active': isMenuOpen}" aria-label="menu"
+        aria-expanded="false" (click)="isMenuOpen = !isMenuOpen" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
+
       </a>
     </div>
     <!-- add is-active class to open the menu  -->
     <div id="navbarBasicExample" class="navbar-menu" [ngClass]="{'is-active': isMenuOpen}">
       <div class="navbar-start">
-        <a class="navbar-item">
+        <!-- <a class="navbar-item">
           Home
         </a>
         <a class="navbar-item">
@@ -23,7 +24,7 @@
         </a>
         <a class="navbar-item">
           Home
-        </a>
+        </a> -->
       </div>
     </div>
   </div>

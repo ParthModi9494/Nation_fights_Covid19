@@ -4,6 +4,7 @@ import { StateModel } from '../../models/table-states.model';
 import { faPlusSquare, faMinusSquare, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { DistrictResponseModel } from '../../models/table-states.model';
 import { DataProiderService } from 'src/app/services/data-proider.service';
+import * as moment from 'moment/moment.js';
 
 @Component({
   selector: 'app-states-table',
@@ -27,6 +28,7 @@ export class StatesTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.dataProvider.statesArr.subscribe((statesArr) => {
       this.statesArr = statesArr || [];
     });
@@ -53,5 +55,14 @@ export class StatesTableComponent implements OnInit {
     })
     return stateObj?.districtData || [];
   }
+
+  getTime(date){
+    if (date) {
+      return  `Last updated ${moment(date,"DD/MM/YYYY HH:mm:ss").fromNow()}`;
+    } else {
+      return "";
+    }
+  }
+
 
 }

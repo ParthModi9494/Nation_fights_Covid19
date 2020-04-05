@@ -129,7 +129,7 @@ export class AppComponent implements OnInit {
 
   getUpdatedTime(date) {
     if (date) {
-      return moment(moment(date).format("DD/MM/YYYY HH:mm:ss")).fromNow();
+      // return moment(moment(date).format("DD/MM/YYYY HH:mm:ss")).fromNow();
     } else {
       return "";
     }
