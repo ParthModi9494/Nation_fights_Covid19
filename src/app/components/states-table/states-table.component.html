@@ -1,31 +1,58 @@
 <table class="table is-narrowed is-hoverable is-fullwidth is-striped animated fadeIn">
-  <thead class="has-background-info">
+  <thead>
     <tr class="is-size-7-mobile">
-      <th class="is-hidden-mobile has-text-white" *ngFor="let header of tableHeaders.desktop">{{ header | uppercase }}
+      <th align="center" class="is-hidden-mobile has-text-white sticky has-background-info" *ngFor="let header of tableHeaders.desktop">
+        {{ header | uppercase }}
       </th>
-      <th class="is-hidden-desktop has-text-white" *ngFor="let header of tableHeaders.mobile">{{ header | uppercase }}
+      <th align="center" class="is-hidden-desktop has-text-white sticky has-background-info" *ngFor="let header of tableHeaders.mobile">
+        {{ header | uppercase }}
       </th>
     </tr>
   </thead>
   <tbody>
     <ng-container *ngFor="let state of statesArr">
       <tr class="has-text-centered" [ngClass]="{'is-selected': state?.isSelected}" (click)="toggleState(state)">
-        <th align="left" class="is-size-7-mobile">
+        <td width="auto" align="left" class="is-size-7-mobile is-paddingless">
           <div class="is-flex">
             <span>
               <fa-icon *ngIf="!state?.isSelected" class="is-size-6 is-size-7-mobile has-text-primary" [icon]="plus">
               </fa-icon>
               <fa-icon *ngIf="state?.isSelected" class="is-size-6 is-size-7-mobile" [icon]="minus"></fa-icon>
             </span>
-            <span>
+            <span class="has-text-weight-bold">
               {{ state?.state }}
             </span>
           </div>
-        </th>
-        <td align="center" class="is-size-7-mobile">{{ state?.confirmed }}</td>
-        <td align="center" class="is-size-7-mobile">{{ state?.active}}</td>
-        <td align="center" class="is-size-7-mobile">{{ state?.recovered}}</td>
-        <td align="center" class="is-size-7-mobile">{{ state?.deaths}}</td>
+        </td>
+        <td align="center" class="is-size-7-mobile">
+          <span style="font-size: 0.7rem;" class="has-text-danger">
+            +{{ state?.deltaconfirmed }}
+          </span>
+          <span class="has-text-weight-bold">
+            {{ state?.confirmed }}
+          </span>
+        </td>
+        <td align="center" class="is-size-7-mobile">
+          <span class="has-text-weight-bold">
+            {{ state?.active}}
+          </span>
+        </td>
+        <td align="center" class="is-size-7-mobile">
+          <span style="font-size: 0.7rem;" class="has-text-danger">
+            +{{ state?.deltarecovered }}
+          </span>
+          <span class="has-text-weight-bold">
+            {{ state?.recovered }}
+          </span>
+        </td>
+        <td align="center" class="is-size-7-mobile">
+          <span style="font-size: 0.7rem;" class="has-text-danger">
+            +{{ state?.deltadeaths }}
+          </span>
+          <span class="has-text-weight-bold">
+            {{ state?.deaths }}
+          </span>
+        </td>
       </tr>
       <ng-container *ngIf="state?.isSelected">
         <tr>

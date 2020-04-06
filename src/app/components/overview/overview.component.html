@@ -3,7 +3,8 @@
     <div class="column is-half-mobile">
       <div class="box confirmed">
         <div class="content has-text-danger">
-          <span class="has-text-weight-bold is-size-4 is-size-5-mobile">{{ aggregated?.confirmed }}</span>
+          <div class="has-text-weight-bold is-size-4 is-size-5-mobile">{{ aggregated?.confirmed }}</div>
+          <div class="is-size-7 is-size-7-mobile">[ +{{ aggregated?.deltaconfirmed }} ]</div>
           <p class="heading has-text-grey-light is-size-6 is-size-7-mobile">Confirmed</p>
           <fa-icon class="is-size-4" [icon]="faNotesMedical"></fa-icon>
           <br>
@@ -15,6 +16,7 @@
       <div class="box active">
         <div class="content has-text-info">
           <span class="has-text-weight-bold is-size-4 is-size-5-mobile">{{ aggregated?.active }}</span>
+          <div class="is-size-7 is-size-7-mobile"> - </div>
           <p class="heading has-text-grey-light is-size-6 is-size-7-mobile">Active</p>
           <fa-icon class="is-size-4" [icon]="faProcedures"></fa-icon>
           <br>
@@ -25,6 +27,8 @@
       <div class="box recovered">
         <div class="content has-text-success">
           <span class="has-text-weight-bold is-size-4 is-size-5-mobile">{{ aggregated?.recovered }}</span>
+          <div class="is-size-7 is-size-7-mobile">[ +{{ aggregated?.deltarecovered }} ]</div>
+
           <p class="heading has-text-grey-light is-size-6 is-size-7-mobile">Recovered</p>
           <fa-icon class="is-size-4" [icon]="faSmile"></fa-icon>
           <br>
@@ -35,6 +39,7 @@
       <div class="box deaths">
         <div class="content has-text-grey">
           <span class="has-text-weight-bold is-size-4 is-size-5-mobile">{{ aggregated?.deaths }}</span>
+          <div class="is-size-7 is-size-7-mobile">[ +{{ aggregated?.deltadeaths }} ]</div>
           <p class="heading has-text-grey-light is-size-6 is-size-7-mobile">Deaths</p>
           <fa-icon class="is-size-4" [icon]="faSadTear"></fa-icon>
           <br>
