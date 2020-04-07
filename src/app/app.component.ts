@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
       });
       this.dataProvider.statesArr.next(sortedStatesArr);
       this.dataProvider.aggregated.next(sortedStatesArr[index]);
+      this.dataProvider.casesTimeSeries.next(data.cases_time_series);
       sortedStatesArr.splice(index, 1);
     });
   }

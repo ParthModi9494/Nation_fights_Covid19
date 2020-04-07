@@ -25,4 +25,9 @@ export class OverviewComponent implements OnInit {
     });
   }
 
+
+  getTime(date){
+    return this.dataProvider.getTime(date);
+  }
+
 }

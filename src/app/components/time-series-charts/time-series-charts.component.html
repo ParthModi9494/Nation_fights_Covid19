@@ -1,4 +1,23 @@
-<div class="chart-wrapper">
-  <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" >
-  </canvas>
+<div class="tabs is-boxed">
+  <ul>
+    <li [ngClass]="{'is-active': !daily}" (click)="loadCumulativeData()">
+      <a>
+        <span class="has-text-weight-bold">Cumulative</span>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': daily}" (click)="loadDailyData()">
+      <a>
+        <span class="has-text-weight-bold">Daily</span>
+      </a>
+    </li>
+  </ul>
 </div>
+
+<highcharts-chart [Highcharts]="Highcharts" [options]="confirmedCasesChartOptions" (update)="true"
+  style="width: 100%; height: 300px; display: block;"></highcharts-chart>
+<br>
+<highcharts-chart [Highcharts]="Highcharts" [options]="recoveredCasesChartOptions"
+  style="width: 100%; height: 300px; display: block;"></highcharts-chart>
+<br>
+<highcharts-chart [Highcharts]="Highcharts" [options]="deceasedCasesChartOptions"
+  style="width: 100%; height: 300px; display: block;"></highcharts-chart>
