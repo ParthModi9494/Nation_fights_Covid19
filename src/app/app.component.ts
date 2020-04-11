@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
       const sortedStatesArr = stateArr.sort((a, b) => {
         return Number[b.confirmed] - Number[a.confirmed];
       });
-      console.log("sortedStatesArr", sortedStatesArr);
       const index = sortedStatesArr.findIndex((x) => {
         return x.state === "Total";
       });

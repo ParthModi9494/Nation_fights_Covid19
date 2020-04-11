@@ -1,32 +1,68 @@
-import { Component, OnInit } from '@angular/core';
-import * as Highcharts from 'highcharts';
-import { Options } from 'highcharts';
-import { DataProiderService } from 'src/app/services/data-proider.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Label, BaseChartDirective, Color } from 'ng2-charts';
 import { CasesTimeSeries } from 'src/app/models/cases-time-series.model';
+import { DataProiderService } from 'src/app/services/data-proider.service';
 @Component({
   selector: 'app-time-series-charts',
   templateUrl: './time-series-charts.component.html',
   styleUrls: ['./time-series-charts.component.scss']
 })
 export class TimeSeriesChartsComponent implements OnInit {
-  Highcharts = Highcharts; // required
-  confirmedCasesChartOptions: Options;
-  recoveredCasesChartOptions: Options;
-  deceasedCasesChartOptions: Options;
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   timeseries: CasesTimeSeries[] = [];
-
   dailyConfirmedCases: number[] = [];
   dailyRecoveredCases: number[] = [];
   dailyDeceasedCases: number[] = [];
 
   totalConfirmedCases: number[] = [];
   totalRecoveredCases: number[] = [];
-  TotalDeceasesCases: number[] = [];
-  daily = false;
+  totalDeceasedCases: number[] = [];
   dates: string[] = [];
+
+  daily = false;
+
+  lineChartLabels: Label[] = [];
+  confirmedChartOptions: ChartOptions = this.setDefaultChartOptions("Confirmed");
+  recoveredChartOptions: ChartOptions = this.setDefaultChartOptions("Recovered");
+  deceasedChartOptions: ChartOptions = this.setDefaultChartOptions("Deceased");
+
+  confirmedChartData: ChartDataSets[] = [this.createConfirmedDataSet()];
+  recoveredChartData: ChartDataSets[] = [this.createRecoveredDataSet()];
+  deceasedChartData: ChartDataSets[] = [this.createDeceasedDataSet()];
+  lineChartType = "line";
+  lineChartLegend = false;
+
   constructor(
     private dataProvider: DataProiderService
   ) { }
+
+  createConfirmedDataSet(): ChartDataSets {
+    return {
+      data: this.daily ? this.dailyConfirmedCases : this.totalConfirmedCases,
+      label: "Confirmed",
+      borderColor: "hsl(348, 100%, 61%)",
+      backgroundColor: "hsla(348, 100%, 61%,0.4)"
+    }
+  }
+
+  createRecoveredDataSet(): ChartDataSets {
+    return {
+      data: this.daily ? this.dailyRecoveredCases : this.totalRecoveredCases,
+      label: "Recovered",
+      borderColor: "hsl(141, 53%, 53%)",
+      backgroundColor: "hsla(141, 53%, 53%,0.4)",
+    }
+  }
+
+  createDeceasedDataSet(): ChartDataSets {
+    return {
+      data: this.daily ? this.dailyDeceasedCases : this.totalDeceasedCases,
+      label: "Deceased",
+      borderColor: "hsl(0, 0%, 71%)",
+      backgroundColor: "hsla(0, 0%, 71%,0.4)"
+    }
+  }
 
   ngOnInit(): void {
     this.dataProvider.casesTimeSeries.subscribe((timeseries: CasesTimeSeries[]) => {
@@ -36,151 +72,78 @@ export class TimeSeriesChartsComponent implements OnInit {
 
       this.totalConfirmedCases = timeseries.map((x) => { return Number(x.totalconfirmed) });
       this.totalRecoveredCases = timeseries.map((x) => { return Number(x.totalrecovered) });
-      this.TotalDeceasesCases = timeseries.map((x) => { return Number(x.totaldeceased) });
+      this.totalDeceasedCases = timeseries.map((x) => { return Number(x.totaldeceased) });
 
       this.dates = timeseries.map((x) => { return x.date });
+      this.lineChartLabels = this.dates;
 
-      this.setConfirmedChartOptions();
-      this.setRecoveredChartOptions();
-      this.setDeceasedChartOptions();
+      this.confirmedChartData.pop();
+      this.confirmedChartData.push(this.createConfirmedDataSet());
+
+      this.recoveredChartData.pop();
+      this.recoveredChartData.push(this.createRecoveredDataSet());
+
+      this.deceasedChartData.pop();
+      this.deceasedChartData.push(this.createDeceasedDataSet());
     })
   }
 
-  setDeceasedChartOptions() {
-    this.deceasedCasesChartOptions = {
-      chart: {
-        borderRadius: 10,
-        type: 'spline',
-        backgroundColor: "hsla(0, 0%, 21%,0.1)"
-      },
+  setDefaultChartOptions(text: string): ChartOptions {
+    return {
       title: {
-        style: {
-          color: "hsl(0, 0%, 21%)"
-        },
-        text: 'Deceased Cases'
+        text: text,
+        display: true
       },
-      xAxis:
-      {
-        categories: this.dates
-      },
-      yAxis: {
-        title: {
-          text: 'Cases'
-        }
-      },
-      plotOptions: {
-        spline: {
-          color: "hsl(0, 0%, 21%)"
-        }
-      },
-      series: [
-        {
-          data: this.daily ? this.dailyDeceasedCases : this.TotalDeceasesCases,
-          type: 'spline',
-          name: "Deacesed",
-          marker: {
-            enabled: true,
-            radius: 1
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            fontSize: 10
+          },
+          gridLines: {
+            display: true
           }
-        }
-      ]
+        }],
+        yAxes: [{
+          ticks: {
+            fontSize: 10,
+          },
+          gridLines: {
+            display: true
+          }
+        }],
+      }
     }
   }
-  setRecoveredChartOptions() {
 
-    this.recoveredCasesChartOptions = {
-      chart: {
-        borderRadius: 10,
-        type: 'spline',
-        backgroundColor: "hsla(141, 53%, 53%,0.1)"
-      },
-      title: {
-        style: {
-          color: "hsl(141, 53%, 53%)"
-        },
-        text: 'Recovered Cases'
-      },
-      xAxis:
-      {
-        categories: this.dates
-      },
-      yAxis: {
-        title: {
-          text: 'Cases'
-        }
-      },
-      plotOptions: {
-        spline: {
-          color: "hsl(141, 53%, 53%)"
-        }
-      },
-      series: [
-        {
-          data: this.daily ? this.dailyRecoveredCases : this.totalRecoveredCases,
-          type: 'spline',
-          name: "Recovered",
-          marker: {
-            enabled: true,
-            radius: 1
-          }
-        }
-      ]
-    };
-  }
 
-  setConfirmedChartOptions() {
-    this.confirmedCasesChartOptions = {
-      chart: {
-        borderRadius: 10,
-        type: 'spline',
-        backgroundColor: "hsla(348, 100%, 61%,0.1)"
-      },
-      title: {
-        style: {
-          color: "hsl(348, 100%, 61%)"
-        },
-        text: 'Confirmed Cases'
-      },
-      xAxis:
-      {
-        categories: this.dates
-      },
-      yAxis: {
-        title: {
-          text: 'Cases'
-        }
-      },
-      plotOptions: {
-        spline: {
-          color: "hsl(348, 100%, 61%)"
-        }
-      },
-      series: [
-        {
-          data: this.daily ? this.dailyConfirmedCases : this.totalConfirmedCases,
-          type: 'spline',
-          name: "Confirmed",
-          marker: {
-            enabled: true,
-            radius: 1
-          }
-        }
-      ]
-    };
-  }
   loadDailyData() {
     this.daily = true;
-    this.setConfirmedChartOptions();
-    this.setRecoveredChartOptions();
-    this.setDeceasedChartOptions();
+    this.lineChartType = "bar";
+
+    this.confirmedChartData.pop();
+    this.confirmedChartData.push(this.createConfirmedDataSet());
+
+    this.recoveredChartData.pop();
+    this.recoveredChartData.push(this.createRecoveredDataSet());
+
+    this.deceasedChartData.pop();
+    this.deceasedChartData.push(this.createDeceasedDataSet());
+
   }
 
   loadCumulativeData() {
-    console.log("cumulative");
     this.daily = false;
-    this.setConfirmedChartOptions();
-    this.setRecoveredChartOptions();
-    this.setDeceasedChartOptions();
+    this.lineChartType = "line";
+
+    this.confirmedChartData.pop();
+    this.confirmedChartData.push(this.createConfirmedDataSet());
+
+    this.recoveredChartData.pop();
+    this.recoveredChartData.push(this.createRecoveredDataSet());
+
+    this.deceasedChartData.pop();
+    this.deceasedChartData.push(this.createDeceasedDataSet());
   }
 
 }

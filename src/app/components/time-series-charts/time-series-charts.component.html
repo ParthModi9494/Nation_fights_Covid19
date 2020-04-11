@@ -13,6 +13,27 @@
   </ul>
 </div>
 
+<div>
+  <canvas baseChart width="400" height="250" [datasets]="confirmedChartData" [labels]="lineChartLabels"
+    [options]="confirmedChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
+  </canvas>
+</div>
+
+<div>
+  <canvas baseChart width="400" height="200" [datasets]="recoveredChartData" [labels]="lineChartLabels"
+    [options]="recoveredChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
+  </canvas>
+</div>
+
+<div>
+  <canvas baseChart width="400" height="200" [datasets]="deceasedChartData" [labels]="lineChartLabels"
+    [options]="deceasedChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
+  </canvas>
+</div>
+
+
+
+<!--
 <highcharts-chart [Highcharts]="Highcharts" [options]="confirmedCasesChartOptions" (update)="true"
   style="width: 100%; height: 300px; display: block;"></highcharts-chart>
 <br>
@@ -20,4 +41,4 @@
   style="width: 100%; height: 300px; display: block;"></highcharts-chart>
 <br>
 <highcharts-chart [Highcharts]="Highcharts" [options]="deceasedCasesChartOptions"
-  style="width: 100%; height: 300px; display: block;"></highcharts-chart>
+  style="width: 100%; height: 300px; display: block;"></highcharts-chart> -->
