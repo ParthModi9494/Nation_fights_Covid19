@@ -14,7 +14,7 @@
   <tbody>
     <ng-container *ngFor="let state of statesArr">
       <tr class="has-text-centered" [ngClass]="{'is-selected': state?.isSelected}" (click)="toggleState(state)">
-        <td width="auto" align="left" class="is-size-7-mobile is-paddingless">
+        <td  align="left" class="is-size-7-mobile is-paddingless">
           <div class="is-flex">
             <span>
               <fa-icon *ngIf="!state?.isSelected" class="is-size-6 is-size-7-mobile has-text-primary" [icon]="plus">
@@ -26,7 +26,7 @@
             </span>
           </div>
         </td>
-        <td align="center" class="is-size-7-mobile">
+        <td align="right" class="is-size-7-mobile">
           <span *ngIf="state.deltaconfirmed !== '0'" style="font-size: 0.7rem;" class="has-text-danger">
             +{{ state?.deltaconfirmed }}
           </span>
@@ -34,12 +34,12 @@
             {{ state?.confirmed }}
           </span>
         </td>
-        <td align="center" class="is-size-7-mobile">
+        <td align="right" class="is-size-7-mobile">
           <span class="has-text-weight-bold">
             {{ state?.active}}
           </span>
         </td>
-        <td align="center" class="is-size-7-mobile">
+        <td align="right" class="is-size-7-mobile">
           <span *ngIf="state.deltarecovered !== '0'" style="font-size: 0.7rem;" class="has-text-danger">
             +{{ state?.deltarecovered }}
           </span>
@@ -47,7 +47,7 @@
             {{ state?.recovered }}
           </span>
         </td>
-        <td align="center" class="is-size-7-mobile">
+        <td align="right" class="is-size-7-mobile">
           <span *ngIf="state.deltadeaths !== '0'" style="font-size: 0.7rem;" class="has-text-danger">
             +{{ state?.deltadeaths }}
           </span>
@@ -75,7 +75,11 @@
               <tbody>
                 <tr class="has-text-centered" *ngFor="let districtObj of getDistricts(state?.state)">
                   <th align="left" class="is-size-7-mobile" colspan="3">{{ districtObj?.district }}</th>
-                  <td align="left" class="is-size-7-mobile" colspan="3">{{ districtObj?.confirmed }}</td>
+                  <td align="right" class="is-size-7-mobile" colspan="3">
+                    <span *ngIf="districtObj.delta.confirmed" style="font-size: 0.7rem;"
+                      class="has-text-danger">+{{ districtObj?.delta?.confirmed }}</span>
+                    {{ districtObj?.confirmed }}
+                  </td>
                 </tr>
                 <tr *ngIf="getDistricts(state?.state).length ==0" class="has-text-centered">
                   <td colspan="5" align="center" class="is-size-7-mobile">No Data</td>
@@ -91,7 +95,7 @@
   </tbody>
   <tfoot class="has-background-danger">
     <tr>
-      <th align="left" class="is-size-7-mobile has-text-white">{{ aggregated?.state | uppercase }}</th>
+      <th align="left" class="is-size-7-mobile has-text-white">{{ aggregated?.state }}</th>
       <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.confirmed }}</td>
       <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.active}}</td>
       <td align="center" class="is-size-7-mobile has-text-white">{{ aggregated?.recovered}}</td>

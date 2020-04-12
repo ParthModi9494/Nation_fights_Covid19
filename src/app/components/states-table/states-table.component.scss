@@ -1,6 +1,9 @@
 @import "~bulma/sass/utilities/_all.sass";
 
 table {
+  td{
+    vertical-align: middle;
+  }
   tr:hover {
     cursor: pointer;
   }
