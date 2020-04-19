@@ -3,11 +3,11 @@
     <tr class="is-size-7-mobile">
       <th align="center" class="is-hidden-mobile has-text-white sticky has-background-info"
         *ngFor="let header of tableHeaders.desktop">
-        {{ header | uppercase }}
+        {{ header }}
       </th>
       <th align="center" class="is-hidden-desktop has-text-white sticky has-background-info"
         *ngFor="let header of tableHeaders.mobile">
-        {{ header | uppercase }}
+        {{ header }}
       </th>
     </tr>
   </thead>
@@ -57,19 +57,19 @@
         </td>
       </tr>
       <ng-container *ngIf="state?.isSelected">
-        <tr>
+        <tr class="animated fadeIn">
           <td colspan="5">
             <span class="is-pulled-left is-size-7-mobile has-text-success">{{ getTime(state?.lastupdatedtime) }}</span>
           </td>
         </tr>
 
-        <tr class="is-selected">
+        <tr class="is-selected animated fadeIn">
           <td colspan="5">
             <table class="table is-bordered is-narrowed is-fullwidth is-striped">
               <thead>
                 <tr class="is-size-7-mobile has-background-info">
                   <th align="left" class="is-size-7-mobile has-text-white" colspan="3">District</th>
-                  <th align="left" class="is-size-7-mobile has-text-white" colspan="3">Confirmed</th>
+                  <th align="right" class="is-size-7-mobile has-text-white" colspan="3">Confirmed</th>
                 </tr>
               </thead>
               <tbody>
